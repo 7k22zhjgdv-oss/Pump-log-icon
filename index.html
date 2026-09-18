@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pump Log</title>
+
+<!-- This is the one tag Apps Script itself can never add to its own page (see
+     the app's Code.gs for the full explanation). A plain static host has no
+     such restriction, so iOS picks this up correctly on "Add to Home Screen". -->
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Pump Log">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#FAF7F1">
+
+<!-- Instant redirect to the real app. meta-refresh is a no-JS fallback;
+     location.replace() (below) fires first and doesn't leave this page in
+     the back-button history, so tapping "back" from the app doesn't bounce
+     you here. -->
+<meta http-equiv="refresh" content="0; url=https://script.google.com/macros/s/AKfycbxuGpuW9uzpKp97sc9vTkFS5o_1WoonL7_q9fH0SH-HJJAZ3Dy29LtqreUofuBLp238/exec">
+
+<style>
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: #FAF7F1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: -apple-system, "Public Sans", sans-serif;
+    color: #7A7266;
+    font-size: 14px;
+  }
+  a { color: #A9762E; }
+</style>
+<script>
+  location.replace("https://script.google.com/macros/s/AKfycbxuGpuW9uzpKp97sc9vTkFS5o_1WoonL7_q9fH0SH-HJJAZ3Dy29LtqreUofuBLp238/exec");
+</script>
+</head>
+<body>
+  <p>Opening Pump Log&hellip; <a href="https://script.google.com/macros/s/AKfycbxuGpuW9uzpKp97sc9vTkFS5o_1WoonL7_q9fH0SH-HJJAZ3Dy29LtqreUofuBLp238/exec">tap here</a> if it doesn't open automatically.</p>
+</body>
+</html>
