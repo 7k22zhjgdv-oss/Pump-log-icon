@@ -7,9 +7,7 @@
 
 <!-- This is the one tag Apps Script itself can never add to its own page (see
      the app's Code.gs for the full explanation). A plain static host has no
-     such restriction, so iOS picks this up correctly on "Add to Home Screen" —
-     AS LONG AS this page doesn't navigate away before you get the Share sheet
-     open. See the redirect logic below. -->
+     such restriction, so iOS picks this up correctly on "Add to Home Screen". -->
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" type="image/png" href="icon-180.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -18,52 +16,24 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#FAF7F1">
 
+<!-- The app is embedded here rather than redirected to. That matters for two
+     reasons:
+     1. This page (on github.io) never navigates away, so "Add to Home Screen"
+        always captures ITS icon -- no timing race like the first version had.
+     2. iOS drops a standalone home-screen app out of fullscreen mode and back
+        into Safari's browser chrome the moment the TOP-LEVEL page crosses to a
+        different domain. A redirect to script.google.com did exactly that.
+        Embedding the app in an iframe means the top-level page stays on
+        github.io the whole time, so that trigger never fires.
+     Apps Script's own doGet() sets XFrameOptionsMode.ALLOWALL (see Code.gs),
+     which -- per Google's own docs -- removes the X-Frame-Options header
+     specifically so a page like this one is allowed to embed it. -->
 <style>
-  html, body {
-    margin: 0;
-    height: 100%;
-    background: #FAF7F1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-family: -apple-system, "Public Sans", sans-serif;
-    color: #2A2521;
-    text-align: center;
-    padding: 24px;
-    box-sizing: border-box;
-  }
-  img { width: 72px; height: 72px; border-radius: 18px; margin-bottom: 18px; }
-  h1 { font-size: 17px; margin: 0 0 6px; }
-  p { color: #7A7266; font-size: 13px; margin: 0 0 22px; max-width: 280px; line-height: 1.5; }
-  a.open-btn {
-    display: inline-block;
-    background: #A9762E;
-    color: #fff;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 15px;
-    padding: 13px 28px;
-    border-radius: 12px;
-  }
+  html, body { margin: 0; height: 100%; background: #FAF7F1; }
+  iframe { border: none; width: 100%; height: 100%; display: block; }
 </style>
-
-<script>
-  // IMPORTANT: only auto-redirect once this page is actually running as an
-  // installed home-screen app (navigator.standalone is iOS Safari's flag for
-  // that). While it's just being viewed as a normal Safari tab -- which is
-  // exactly the moment "Add to Home Screen" needs -- it must NOT navigate
-  // away, or Safari captures the destination page's icon (none) instead of
-  // this page's (the real one). This was the bug in the first version.
-  if (window.navigator && window.navigator.standalone) {
-    location.replace("https://script.google.com/macros/s/AKfycbxuGpuW9uzpKp97sc9vTkFS5o_1WoonL7_q9fH0SH-HJJAZ3Dy29LtqreUofuBLp238/exec");
-  }
-</script>
 </head>
 <body>
-  <img src="icon-180.png" alt="">
-  <h1>Pump Log</h1>
-  <p>Tap Share &rarr; Add to Home Screen now to install the icon. Once it's on your Home Screen, opening it from there goes straight into the app.</p>
-  <a class="open-btn" href="https://script.google.com/macros/s/AKfycbxuGpuW9uzpKp97sc9vTkFS5o_1WoonL7_q9fH0SH-HJJAZ3Dy29LtqreUofuBLp238/exec">Open Pump Log now</a>
+  <iframe src="https://script.google.com/macros/s/AKfycbxuGpuW9uzpKp97sc9vTkFS5o_1WoonL7_q9fH0SH-HJJAZ3Dy29LtqreUofuBLp238/exec" title="Pump Log"></iframe>
 </body>
 </html>
