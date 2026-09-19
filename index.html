@@ -14,7 +14,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Pump Log">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#FAF7F1">
+<meta name="theme-color" content="#FAF7F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1B1712" media="(prefers-color-scheme: dark)">
 
 <!-- The app is embedded here rather than redirected to. That matters for two
      reasons:
@@ -31,6 +32,13 @@
 <style>
   html, body { margin: 0; height: 100%; background: #FAF7F1; }
   iframe { border: none; width: 100%; height: 100%; display: block; }
+  /* The iframe doesn't extend under the iOS status bar / notch, so this
+     wrapper's own background shows through that strip. Match it to the
+     app's own --bg / --bg(dark) values (see Index.html) so there's no
+     seam, light or dark. */
+  @media (prefers-color-scheme: dark) {
+    html, body { background: #1B1712; }
+  }
 </style>
 </head>
 <body>
